@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Card } from "./components/Card";
+// import { Nav } from "./components/Nav";
 
 function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const rs = await fetch('./stays.json');
+      const rs = await fetch('./public/stays.json');
       const rsJson = await rs.json();
       console.log(rsJson)
       setData(rsJson);
@@ -18,21 +19,23 @@ function App() {
   return (
     <>
       <div className='container'>
-        {data.map((e, index) => (
+        {data.map((e) => (
+          // <Nav
+          //   key={e.id}
+          //   city={e.city}
+          //   maxGuests={e.maxGuests}
+          //           />
           <Card
-            key={index}
-            city={e.city}
-            country={e.country}
+            key={e.id}
             superHost={e.superHost}
             title={e.title}
             rating={e.rating}
-            maxGuests={e.maxGuests}
             type={e.type}
             beds={e.beds}
             photo={e.photo}
           />
         ))}
-       </div>
+      </div>
     </>
   )
 }
