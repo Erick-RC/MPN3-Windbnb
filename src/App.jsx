@@ -32,7 +32,7 @@ function App() {
             photo={e.photo}
           />
         ))}
-      </div>
+       </div>
     </>
   )
 }
