@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      const rs = await fetch('./public/stays.json');
+      const rs = await fetch('../src/assets/stays.json');
       const rsJson = await rs.json();
       console.log(rsJson)
       setData(rsJson);
