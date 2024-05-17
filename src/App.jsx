@@ -26,7 +26,7 @@ function App() {
           //   maxGuests={e.maxGuests}
           //           />
           <Card
-            key={e.id}
+            // key={e.id}
             superHost={e.superHost}
             title={e.title}
             rating={e.rating}
