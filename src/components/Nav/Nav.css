@@ -20,16 +20,18 @@
   align-items: center;
   justify-content: flex-end;
   background: #FFF;
-  border-radius: 6px;
+  border-radius: 16px;
   box-shadow: 0 0 4px 1px rgba(221, 220, 220, 0.534);
 }
 
 .navigation-location-select {
   padding: 10px;
   border: none;
-  border-radius: 3px;
-
+  border-radius: 6px;
   outline: none;
+  min-width: 130px;
+  appearance: none; 
+  -webkit-appearance: none; 
 }
 
 .navigation-guests-input {

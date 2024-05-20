@@ -4,8 +4,19 @@ import searchIcon from '../img/red-search.png';
 import './Nav.css';
 
 export const Nav = ({ dates, setFiltered }) => {
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [guests, setGuests] = useState(1);
+  const [selectedLocation, setSelectedLocation] = useState('Helsinki, Finland');
+  const [guests, setGuests] = useState('');
+  const [showAddGuests, setShowAddGuests] = useState(true);
+
+  const handleGuestsChange = (e) => {
+    const value = e.target.value;
+    setGuests(value);
+    if (value === '') {
+      setShowAddGuests(true);
+    } else {
+      setShowAddGuests(false);
+    }
+  };
 
   const filterData = () => {
     const filteredResults = dates.filter(({ city, maxGuests }) => {
@@ -27,21 +38,30 @@ export const Nav = ({ dates, setFiltered }) => {
           value={selectedLocation}
           onChange={(e) => setSelectedLocation(e.target.value)}
         >
-          <option value="">Locations</option>
-          <option value="Helsinki">Helsinki</option>
-          <option value="Turku">Turku</option>
-          <option value="Vaasa">Vaasa</option>
-          <option value="Oulu">Oulu</option>
+          <option value="Helsinki">Helsinki, Finland</option>
+          <option value="Turku">Turku, Finland</option>
+          <option value="Vaasa">Vaasa, Finland</option>
+          <option value="Oulu">Oulu, Finland</option>
         </select>
-        <input
-          className='navigation-guests-input'
-          type="number"
-          placeholder='Add Guests'
-          value={guests}
-          onChange={(e) => setGuests(Number(e.target.value))}
-          max="10"
-          min="1"
-        />
+        {showAddGuests ? (
+          <input
+            className='navigation-guests-input'
+            type="text"
+            placeholder='Add Guests'
+            value={guests}
+            onChange={handleGuestsChange}
+          />
+        ) : (
+          <input
+            className='navigation-guests-input'
+            type="number"
+            placeholder='Add Guests'
+            value={guests}
+            onChange={handleGuestsChange}
+            max="10"
+            min="1"
+          />
+        )}
         <button className='navigation-btn' onClick={filterData}>
           <img src={searchIcon} alt="search" />
         </button>
