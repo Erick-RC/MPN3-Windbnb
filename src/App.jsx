@@ -4,12 +4,12 @@ import { Nav } from "./components/Nav";
 
 function App() {
   const [data, setData] = useState([]);
+    const [selectedLocation, setSelectedLocation] = useState("Helsinki, Finland");
 
   useEffect(() => {
     const getData = async () => {
       const rs = await fetch('stays.json');
       const rsJson = await rs.json();
-      console.log(rsJson)
       setData(rsJson);
     };
 

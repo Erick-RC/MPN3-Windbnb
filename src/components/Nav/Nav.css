@@ -111,11 +111,8 @@
 
   .AddGuests button {
     height: 40px;
-    /* Ajusta la altura del botón */
     line-height: 40px;
-    /* Centra el texto verticalmente */
-    font-size: 14px;
-    /* Ajusta el tamaño del texto */
+    font-size: 14px
   }
 
   .left-content img {
@@ -135,29 +132,22 @@
   .card-container {
     max-width: 90%;
     margin: 10px auto;
-    /* Añade margen para evitar que la tarjeta toque los bordes de la pantalla */
   }
 
   .image-class {
-    width: 100%;
-    /* La imagen ocupa el ancho completo del contenedor */
+    width: 100%; 
     height: auto;
-    /* Mantiene la proporción de la imagen */
     border-radius: 8px;
-    /* Ajusta el borde redondeado para que coincida con el contenedor */
   }
 
   .title {
     font-size: 14px;
-    /* Ajusta el tamaño de la fuente para pantallas pequeñas */
     margin: 10px;
-    /* Ajusta los márgenes para pantallas pequeñas */
   }
 
   .ratings,
   .type,
   .superhost {
     margin: 10px;
-    /* Ajusta los márgenes para mejor apariencia en móviles */
   }
 }
