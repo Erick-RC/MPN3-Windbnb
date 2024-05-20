@@ -1,59 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { Modal } from "../Modal/Modal";
-import './Nav.css'
-import Logo from '../img/logo.png'
-import Red from '../img/red-search.png'
-import {LocationButton} from "../Buttons/LocationButton";
+import React, { useState } from 'react';
+import logo from '../img/logo.png';
+import searchIcon from '../img/red-search.png';
+import './Nav.css';
 
-export const Nav = () => {
+export const Nav = ({ dates, setFiltered }) => {
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [guests, setGuests] = useState(1);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState("Helsinki, Finland"); // Estado inicial
-
-  const openModal = () => {
-    setModalOpen(true);
+  const filterData = () => {
+    const filteredResults = dates.filter(({ city, maxGuests }) => {
+      const locationMatch = !selectedLocation || city.toLowerCase() === selectedLocation.toLowerCase();
+      const guestsMatch = maxGuests >= guests;
+      return locationMatch && guestsMatch;
+    });
+    setFiltered(filteredResults);
   };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const updateSelectedLocation = (location) => {
-    setSelectedLocation(location);
-  };
-
-  useEffect(() => {
-    updateSelectedLocation("Helsinki, Finland");
-  }, []);
 
   return (
-    <nav className="nav-container">
-      <div className="left-content">
-        <div className="logo">
-          <img src={Logo} alt="logo" />
-        </div>
-        <h1>Stays in Finland</h1>
-      </div>
-      <div className="right-content">
-        <div className="search-container">
-          <button onClick={openModal}>{selectedLocation}</button>
-          <div className="AddGuests">
-            <button onClick={openModal}>Add guests</button>
-          </div>
-          <button onClick={openModal}>
-            <img src={Red} alt="search" />
-          </button>
-        </div>
-        <h6>12+ stays</h6>
-      </div>
-
-      <Modal isOpen={modalOpen} onClose={closeModal} selectedLocation={selectedLocation}>
-        <LocationButton
-          onLocationSelected={updateSelectedLocation}
-          selectedLocation={selectedLocation}
+    <nav className='navbar'>
+      <a href="#" className="navigation-logo">
+        <img src={logo} alt="Airbnb logo" className="navigation-logo-image" />
+      </a>
+      <div className='navigation-inputs'>
+        <select
+          className='navigation-location-select'
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+        >
+          <option value="">Locations</option>
+          <option value="Helsinki">Helsinki</option>
+          <option value="Turku">Turku</option>
+          <option value="Vaasa">Vaasa</option>
+          <option value="Oulu">Oulu</option>
+        </select>
+        <input
+          className='navigation-guests-input'
+          type="number"
+          placeholder='Add Guests'
+          value={guests}
+          onChange={(e) => setGuests(Number(e.target.value))}
+          max="10"
+          min="1"
         />
-      </Modal>
-
+        <button className='navigation-btn' onClick={filterData}>
+          <img src={searchIcon} alt="search" />
+        </button>
+      </div>
     </nav>
-  )
-}
+  );
+};

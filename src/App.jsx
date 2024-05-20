@@ -4,13 +4,14 @@ import { Nav } from "./components/Nav";
 
 function App() {
   const [data, setData] = useState([]);
-    const [selectedLocation, setSelectedLocation] = useState("Helsinki, Finland");
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const rs = await fetch('stays.json');
       const rsJson = await rs.json();
       setData(rsJson);
+      setFilteredData(rsJson);
     };
 
     getData();
@@ -18,10 +19,10 @@ function App() {
 
   return (
     <>
-      <Nav />
+      <Nav dates={data} setFiltered={setFilteredData} />
       <div className='container'>
-        {data.map((e, index) => (
-      <Card
+        {filteredData.map((e, index) => (
+          <Card
             key={index}
             superHost={e.superHost}
             title={e.title}
@@ -36,4 +37,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
